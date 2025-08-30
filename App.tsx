@@ -29,7 +29,7 @@ function App() {
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-4 font-sans">
-      <div className="text-center space-y-4">
+      <div className="text-center space-y-4 pb-16">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
           Animación de Spritesheet
         </h1>
@@ -102,7 +102,7 @@ function App() {
       </div>
       <footer className="absolute bottom-4 text-xs text-gray-600">
         <p>
-          Creado por <a href="https://x.com/MKey2023" target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:underline">MKey2023</a> con React, TypeScript y Tailwind CSS
+          Creado por <a href="https://x.com/MKey2023" target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:underline">BuildWithAI</a> con React, TypeScript y Tailwind CSS
         </p>
       </footer>
     </main>
