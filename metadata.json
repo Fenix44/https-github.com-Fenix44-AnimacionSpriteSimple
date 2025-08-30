@@ -1,0 +1,5 @@
+{
+  "name": "Spritesheet Animator simple",
+  "description": "A simple web application that displays a spritesheet animation using React and Tailwind CSS. It animates a 7-frame, 64x64px sprite by cycling through background positions.",
+  "requestFramePermissions": []
+}
