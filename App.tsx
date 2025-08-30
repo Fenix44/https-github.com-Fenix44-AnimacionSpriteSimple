@@ -1,12 +1,31 @@
 import React, { useState } from 'react';
 import { SpriteAnimator } from './components/SpriteAnimator';
+import { DirectionalSpriteAnimator } from './components/DirectionalSpriteAnimator';
+
+const SPRITESHEET_URLS = {
+  up: 'https://raw.githubusercontent.com/Fenix44/ImageSpritesFenix/refs/heads/main/Peon-Orc-Pelle-DOS.png',
+  right: 'https://raw.githubusercontent.com/Fenix44/ImageSpritesFenix/refs/heads/main/Peon-Orc-Pelle-DROITE.png',
+  left: 'https://raw.githubusercontent.com/Fenix44/ImageSpritesFenix/refs/heads/main/Peon-Orc-Pelle-GAUCHE.png',
+  down: 'https://raw.githubusercontent.com/Fenix44/ImageSpritesFenix/refs/heads/main/Peon-Orc-Pelle-FACE.png',
+};
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(true);
+  const [directionalSpriteUrl, setDirectionalSpriteUrl] = useState(SPRITESHEET_URLS.down);
 
   const toggleAnimation = () => {
     setIsPlaying(prev => !prev);
   };
+
+  const ArrowButton = ({ direction, onClick, children }) => (
+    <button
+      onClick={onClick}
+      aria-label={`Mover hacia ${direction}`}
+      className="w-12 h-12 flex items-center justify-center font-semibold text-white bg-purple-600 rounded-md shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75 transition-colors duration-300"
+    >
+      {children}
+    </button>
+  );
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-4 font-sans">
@@ -42,7 +61,43 @@ function App() {
               className="[image-rendering:pixelated] [image-rendering:crisp-edges]"
             />
           </div>
-           <p className="text-sm text-gray-500 pt-4">La animación se logra cambiando dinámicamente las clases de Tailwind para <code>background-position</code>.</p>
+           <p className="text-sm text-gray-500 pt-4">La primera animación se logra cambiando dinámicamente las clases de Tailwind para <code>background-position</code>.</p>
+        </div>
+
+        {/* --- Nueva Sección de Animación Interactiva --- */}
+        <div className="pt-8 w-full max-w-lg mx-auto">
+          <h2 className="text-lg text-gray-400 mb-4">Animación Interactiva</h2>
+          <div className="inline-grid grid-cols-3 grid-rows-3 gap-2 items-center bg-gray-800/50 p-6 rounded-lg shadow-lg border border-gray-700">
+            {/* Fila 1 */}
+            <div className="col-start-2 flex justify-center">
+               <ArrowButton direction="arriba" onClick={() => setDirectionalSpriteUrl(SPRITESHEET_URLS.up)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" /></svg>
+               </ArrowButton>
+            </div>
+            
+            {/* Fila 2 */}
+            <div className="col-start-1 flex justify-center">
+              <ArrowButton direction="izquierda" onClick={() => setDirectionalSpriteUrl(SPRITESHEET_URLS.left)}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+              </ArrowButton>
+            </div>
+            <div className="col-start-2">
+              <DirectionalSpriteAnimator spritesheetUrl={directionalSpriteUrl} />
+            </div>
+            <div className="col-start-3 flex justify-center">
+              <ArrowButton direction="derecha" onClick={() => setDirectionalSpriteUrl(SPRITESHEET_URLS.right)}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+              </ArrowButton>
+            </div>
+
+            {/* Fila 3 */}
+            <div className="col-start-2 flex justify-center">
+               <ArrowButton direction="abajo" onClick={() => setDirectionalSpriteUrl(SPRITESHEET_URLS.down)}>
+                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+               </ArrowButton>
+            </div>
+          </div>
+          <p className="text-sm text-gray-500 pt-4">Haz clic en las flechas para cambiar la dirección de la animación del personaje.</p>
         </div>
       </div>
       <footer className="absolute bottom-4 text-xs text-gray-600">
